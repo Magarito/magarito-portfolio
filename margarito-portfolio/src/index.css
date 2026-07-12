@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-900 text-mist-100 font-body antialiased;
+  font-feature-settings: 'ss01' on;
+}
+
+::selection {
+  background: rgba(124, 255, 178, 0.25);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0d10;
+}
+::-webkit-scrollbar-thumb {
+  background: #242932;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #343b47;
+}
+
+/* Signature element: annotation bounding-box corner brackets.
+   Used throughout the site (cards, images, section markers) to
+   literally reference the language of computer-vision annotation. */
+.bbox {
+  position: relative;
+}
+.bbox::before,
+.bbox::after,
+.bbox > .bbox-tl,
+.bbox > .bbox-br {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: theme('colors.truth.DEFAULT');
+  opacity: 0.85;
+  pointer-events: none;
+}
+.bbox::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.bbox::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+.bbox-amber::before,
+.bbox-amber::after {
+  border-color: theme('colors.pred.DEFAULT');
+}
+
+.tag-label {
+  @apply font-mono text-[11px] tracking-wide uppercase;
+}
+
+.grid-backdrop {
+  background-image: theme('backgroundImage.grid');
+  background-size: theme('backgroundSize.grid');
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.focus-ring {
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-truth focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900;
+}
+
+/* High-contrast "review mode" — toggled via ThemeToggle. */
+html.review-mode body {
+  background-color: #000;
+}
+html.review-mode .bg-ink-900,
+html.review-mode .bg-ink-800,
+html.review-mode .bg-ink-800\/30,
+html.review-mode .bg-ink-800\/50,
+html.review-mode .bg-ink-800\/60,
+html.review-mode .bg-ink-800\/70,
+html.review-mode .bg-ink-800\/90 {
+  background-color: #000 !important;
+}
+html.review-mode .text-mist-300,
+html.review-mode .text-mist-400 {
+  color: #d7dde3 !important;
+}
+html.review-mode .border-ink-600,
+html.review-mode .border-ink-700 {
+  border-color: #3a4150 !important;
+}
